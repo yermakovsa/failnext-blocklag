@@ -68,13 +68,20 @@ jobs:
           GOFLAGS: -mod=readonly
         run: go vet ./...
 
+      - name: Set up Go 1.26 for Staticcheck
+        uses: actions/setup-go@v7
+        with:
+          go-version: "1.26.x"
+          cache: false
+
       - name: staticcheck
         uses: dominikh/staticcheck-action@v1
         env:
           GOFLAGS: -mod=readonly
         with:
-          version: "2026.2"
+          version: "2026.2.1"
           install-go: false
+          cache-key: go1.26-2026.2.1
 
   test-minimum:
     name: test / Go 1.24
